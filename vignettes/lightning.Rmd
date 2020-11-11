@@ -1,0 +1,48 @@
+---
+title: "Migrating from Lightning"
+output:
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Migrating from Lightning}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,eval = FALSE,echo = T)
+```
+
+
+<center>
+
+<img src="images/lightning.png" alt="_" style="width: 600px;"/>
+
+</center>
+
+
+## Intro
+
+Lightning disentangles PyTorch code to decouple the science from the engineering.
+
+## Lightning with fastai
+
+```{r}
+library(fastai)
+library(magrittr)
+
+model = LitModel()
+
+data = Data_Loaders(model$train_dataloader(), model$val_dataloader())$cuda()
+
+nn = nn()
+learn = Learner(data, model, loss_func = nn$functional$cross_entropy, opt_func = Adam,
+                metrics = accuracy)
+learn %>% fit_one_cycle(1, 0.001)
+```
+
+```
+epoch     train_loss  valid_loss  accuracy  time    
+0         0.354146    0.334655    0.911300  00:09   
+```
+
+

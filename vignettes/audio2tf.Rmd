@@ -1,0 +1,131 @@
+---
+title: "Speech Recognition"
+output:
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Speech Recognition}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+## Intro
+
+The [fastai](https://github.com/fastai/fastai) library simplifies training fast and accurate neural nets using modern best practices. See the fastai website to get started. The library is based on research into deep learning best practices undertaken at ```fast.ai```, and includes "out of the box" support for ```vision```, ```text```, ```tabular```, and ```collab``` (collaborative filtering) models. 
+
+
+## Dataset
+
+Grab data from TensorFlow Speech Commands (2.3 GB):
+
+
+```{r}
+commands_path = "SPEECHCOMMANDS"
+audio_files = get_audio_files(commands_path)
+length(audio_files$items)
+# [1] 105835
+```
+
+
+## Preprocess
+
+Prepare dataset and put into data loader:
+
+```{r}
+DBMelSpec = SpectrogramTransformer(mel=TRUE, to_db=TRUE)
+a2s = DBMelSpec()
+crop_4000ms = ResizeSignal(4000)
+tfms = list(crop_4000ms, a2s)
+```
+
+
+```{r}
+auds = DataBlock(blocks = list(AudioBlock(), CategoryBlock()),  
+                 get_items = get_audio_files, 
+                 splitter = RandomSplitter(),
+                 item_tfms = tfms,
+                 get_y = parent_label)
+
+audio_dbunch = auds %>% dataloaders(commands_path, item_tfms = tfms, bs = 20)
+```
+
+See batch:
+
+```{r}
+audio_dbunch %>% show_batch(figsize = c(15, 8.5), nrows = 3, ncols = 3, max_n = 9, dpi = 180)
+```
+
+## Model
+
+Before fitting, 3 channels to 1 channel:
+
+```{r}
+torch = torch()
+alter_learner = function(learn, channels = 1L) {
+  try(learn$model[0][0][['in_channels']] <- channels,
+      silent = TRUE)
+  try(learn$model[0][0][['weight']] <- torch$nn$parameter$Parameter(torch$narrow(learn$model[0][0][['weight']],1L,1L,1L)),
+      silent = TRUE)
+}
+
+
+learn = Learner(audio_dbunch, xresnet18(pretrained = FALSE), nn$CrossEntropyLoss(), metrics=accuracy)
+
+nnchannels = audio_dbunch %>% one_batch() %>% .[[1]] %>% .$shape %>% .[1]
+
+alter_learner(learn, nnchannels)
+```
+
+## Add callbacks
+
+Weights and biases could be save and visualized on [wandb.ai](https://wandb.ai/):
+
+```{r}
+# login for the 1st time then remove it
+login("API_key_from_wandb_dot_ai")
+init(project='R')
+```
+
+```
+wandb: Currently logged in as: henry090 (use `wandb login --relogin` to force relogin)
+wandb: Tracking run with wandb version 0.10.8
+wandb: Syncing run macabre-zombie-2
+wandb: ⭐️ View project at https://wandb.ai/henry090/speech_recognition_from_R
+wandb: 🚀 View run at https://wandb.ai/henry090/speech_recognition_from_R/runs/2sjw3juv
+wandb: Run data is saved locally in wandb/run-20201030_224503-2sjw3juv
+wandb: Run `wandb off` to turn off syncing.
+```
+
+## Conclusion
+
+Now we can train our model:
+
+```{r}
+learn %>% fit_one_cycle(3, lr_max=slice(1e-2), cbs = list(WandbCallback()))
+```
+
+
+```
+epoch   train_loss   valid_loss   accuracy   time 
+------  -----------  -----------  ---------  -----
+epoch   train_loss   valid_loss   accuracy   time 
+------  -----------  -----------  ---------  -----
+WandbCallback requires use of "SaveModelCallback" to log best model
+0       0.590236     0.728817     0.787121   04:18 
+WandbCallback was not able to get prediction samples -> wandb.log must be passed a dictionary
+1       0.288492     0.310335     0.908490   04:19 
+2       0.182899     0.196792     0.941088   04:10 
+```
+
+See beautiful dashboard here:
+
+```
+https://wandb.ai/henry090/speech_recognition_from_R/runs/2sjw3juv?workspace=user-henry090
+```
+
+
+
+
