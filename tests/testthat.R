@@ -1,9 +1,4 @@
 
-os = switch(Sys.info()[['sysname']],
-            Windows= 'windows',
-            Linux  = 'linux',
-            Darwin = 'mac')
-
 options(reticulate.useImportHook = FALSE)
 library(testthat)
 library(fastai)

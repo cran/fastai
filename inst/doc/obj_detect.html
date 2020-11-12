@@ -439,10 +439,12 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb4-7"><a href="#cb4-7"></a></span>
 <span id="cb4-8"><a href="#cb4-8"></a>crit =<span class="st"> </span><span class="kw">RetinaNetFocalLoss</span>(<span class="dt">scales =</span> scales, <span class="dt">ratios =</span> ratios)</span>
 <span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a>retinanet_split =<span class="st"> </span><span class="cf">function</span>(m) {</span>
-<span id="cb4-11"><a href="#cb4-11"></a>  <span class="kw">L</span>(m<span class="op">$</span>encoder,nn<span class="op">$</span><span class="kw">Sequential</span>(m<span class="op">$</span>c5top6, m<span class="op">$</span>p6top7, m<span class="op">$</span>merges,</span>
-<span id="cb4-12"><a href="#cb4-12"></a>                       m<span class="op">$</span>smoothers, m<span class="op">$</span>classifier, m<span class="op">$</span>box_regressor))<span class="op">$</span><span class="kw">map</span>(<span class="kw">params</span>())</span>
-<span id="cb4-13"><a href="#cb4-13"></a>}</span></code></pre></div>
+<span id="cb4-10"><a href="#cb4-10"></a>nn =<span class="st"> </span><span class="kw">nn</span>()</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a>retinanet_split =<span class="st"> </span><span class="cf">function</span>(m) {</span>
+<span id="cb4-13"><a href="#cb4-13"></a>  <span class="kw">L</span>(m<span class="op">$</span>encoder,nn<span class="op">$</span><span class="kw">Sequential</span>(m<span class="op">$</span>c5top6, m<span class="op">$</span>p6top7, m<span class="op">$</span>merges,</span>
+<span id="cb4-14"><a href="#cb4-14"></a>                       m<span class="op">$</span>smoothers, m<span class="op">$</span>classifier, m<span class="op">$</span>box_regressor))<span class="op">$</span><span class="kw">map</span>(<span class="kw">params</span>())</span>
+<span id="cb4-15"><a href="#cb4-15"></a>}</span></code></pre></div>
 </div>
 <div id="fit" class="section level2">
 <h2>Fit</h2>
