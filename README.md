@@ -55,13 +55,20 @@ devtools::install_github('henry090/fastai')
 install_fastai(gpu = FALSE, cuda_version = '10.1', overwrite = FALSE)
 ```
 
+
 **4. Restart RStudio!**
 
-> Note: for GPU version, ensure this is run before reticulate is loaded:
+## Kaggle
 
-```
-options(reticulate.useImportHook = FALSE)
-```
+We currently prepare the examples of usage of the fastai from R in Kaggle competitions:
+
+- [Introduction](https://www.kaggle.com/henry090/r-interface-to-fastai)
+- [MNIST with Pytorch and fastai](https://www.kaggle.com/henry090/r-and-fastai)
+- [NLP Binary Classification](https://www.kaggle.com/henry090/r-fastai-and-transformers)
+- [Audio classification](https://www.kaggle.com/henry090/fast-ai-from-r)
+- [CycleGAN](https://www.kaggle.com/henry090/r-fast-ai-and-cyclegan)
+
+> Contributions are very welcome! 
 
 ## Tabular data
 
@@ -447,8 +454,6 @@ Exciting!
 Now, load and train pets dataset:
 
 ```
-options(reticulate.useImportHook = FALSE) # fix multiple workers issue
-
 library(magrittr)
 library(fastai)
 
@@ -1050,12 +1055,13 @@ Custom accuracy function:
 
 ```
 acc_camvid <- function(input, target) {
- # exclude/filter void label
+  target = target$squeeze(1L)
+  # exclude/filter void label
   mask = target != void_code
   return(
-    (input$argmax(dim=1L)[mask] == target[mask]) %>%
-            float() %>% mean()
-    )
+    (input$argmax(dim=1L)[mask]$eq(target[mask])) %>%
+      float() %>% mean()
+  )
 }
 
 attr(acc_camvid, "py_function_name") <- 'acc_camvid'
@@ -1492,7 +1498,7 @@ And finally, fit:
 lr = 3e-3
 wd = 1e-2
 
-learn %>% fit_one_cycle(2, lr, pct_start = 0.9, wd = wd)
+learn %>% fit_one_cycle(2, slice(lr), pct_start = 0.9, wd = wd)
 ```
 
 ```
@@ -1685,6 +1691,7 @@ Visualize data with different
 [windowing effects](https://radiopaedia.org/articles/windowing-ct):
 
 ```
+dicom_windows = dicom_windows()
 scale = list(FALSE, TRUE, dicom_windows$brain, dicom_windows$subdural)
 titles = c('raw','normalized','brain windowed','subdural windowed')
 

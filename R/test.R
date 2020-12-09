@@ -119,7 +119,7 @@ show_batch <- function(dls, b = NULL, max_n = 9, ctxs = NULL,
 #'
 #' @param learn learner/model
 #' @param ds_idx ds by index
-#' @param dl DL application
+#' @param dl dataloader
 #' @param act activation
 #' @return interpretation object
 #' @export
@@ -329,17 +329,15 @@ most_confused <- function(interp, min_val = 1) {
 #' @param ncols number of columns
 #' @param figsize figure size
 #' @param imsize image size
-#' @param add_vert add vertical
 #' @return plot object
 #' @export
-subplots <- function(nrows = 2, ncols = 2, figsize = NULL, imsize = 4, add_vert = 0) {
+subplots <- function(nrows = 2, ncols = 2, figsize = NULL, imsize = 4) {
   fastai2$vision$all$plt$close()
   args <- list(
     nrows = as.integer(nrows),
     ncols = as.integer(ncols),
     figsize = figsize,
-    imsize = as.integer(imsize),
-    add_vert = as.integer(add_vert)
+    imsize = as.integer(imsize)
   )
 
   do.call(fastai2$medical$imaging$subplots, args)
@@ -483,7 +481,7 @@ gauss_blur2d <- function(x, s) {
 #'
 #' @param object model
 #' @param ds_idx ds by index
-#' @param dl DL application
+#' @param dl dataloader
 #' @param max_n maximum number of images
 #' @param shuffle shuffle or not
 #' @return None
@@ -518,10 +516,18 @@ show_results <- function(object, ds_idx = 1, dl = NULL, max_n = 9, shuffle = TRU
     preds = object$get_preds(dl=list(b), with_decoded=TRUE)
     preds = preds[[3]]
 
-    show_batch(dls, list(
-      torch()$stack(list(b[[1]][2],b[[1]][3]),0L)$cpu(),
-      torch()$stack(list(preds[[2]][2],preds[[2]][3]),0L)
-    ), nrows = 2, ncols = 1, dpi = 120)
+
+    if(object$dls$bs <= 3) {
+      show_batch(dls, list(
+        torch()$stack(list(b[[1]][0],b[[1]][1]),0L)$cpu(),
+        torch()$stack(list(preds[[2]][0],preds[[2]][1]),0L)
+      ), nrows = 2, ncols = 1, dpi = as.integer(dpi))
+    } else {
+      show_batch(dls, list(
+        torch()$stack(list(b[[1]][2],b[[1]][3]),0L)$cpu(),
+        torch()$stack(list(preds[[2]][2],preds[[2]][3]),0L)
+      ), nrows = 2, ncols = 1, dpi = as.integer(dpi))
+    }
 
   } else {
     do.call(object$show_results, args)

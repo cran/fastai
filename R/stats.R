@@ -45,9 +45,12 @@ get_confusion_matrix <- function(object) {
 
   conf = interp$confusion_matrix()
   conf = apply(conf, 2, as.integer)
-  itms = interp$vocab$items$items
-  colnames(conf)=itms
-  rownames(conf)=itms
+
+  if(!is.null(interp$vocab$items$items)) {
+    itms = interp$vocab$items$items
+    colnames(conf)=itms
+    rownames(conf)=itms
+  }
   conf
 }
 
@@ -118,6 +121,7 @@ attr(Perplexity,"py_function_name") <- "Perplexity"
 #' @title One batch
 #'
 #' @param convert to R matrix
+#' @param ... additional parameters to pass
 #' @param object data loader
 #' @return tensor
 #'
@@ -131,8 +135,9 @@ attr(Perplexity,"py_function_name") <- "Perplexity"
 #' }
 #'
 #' @export
-one_batch <- function(object, convert = FALSE) {
-  obj = object$one_batch()
+one_batch <- function(object, convert = FALSE, ... ) {
+  args = list(...)
+  obj = do.call(object$one_batch, args)
 
   if(inherits(obj,'fastai.tabular.data.TabularDataLoaders')) {
     obj
@@ -169,7 +174,12 @@ one_batch <- function(object, convert = FALSE) {
 #'
 #' @export
 summary.fastai.learner.Learner <- function(object, ...) {
-  object$summary()
+  res = !inherits(try(object$blurr_summary, TRUE), "try-error")
+  if(res) {
+    object$blurr_summary()
+  } else {
+    object$summary()
+  }
 }
 
 
