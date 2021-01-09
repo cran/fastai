@@ -103,7 +103,7 @@ show_batch <- function(dls, b = NULL, max_n = 9, ctxs = NULL,
     fastai2$tabular$all$plt$savefig(paste(tmp_d, 'test.png', sep = '/'), dpi = as.integer(dpi))
 
     img <- png::readPNG(paste(tmp_d, 'test.png', sep = '/'))
-    if(!is_rmarkdown()) {
+    if(interactive()) {
       try(dev.off(),TRUE)
     }
     grid::grid.raster(img)
@@ -158,7 +158,7 @@ ClassificationInterpretation_from_learner <- function(learn, ds_idx = 1, dl = NU
 #'
 #' @export
 plot_top_losses <- function(interp, k, largest = TRUE, figsize = c(19.2,10.8),
-                            ..., dpi = NULL) {
+                            ..., dpi = 90) {
 
   fastai2$vision$all$plt$close()
   interp$plot_top_losses(
@@ -177,7 +177,7 @@ plot_top_losses <- function(interp, k, largest = TRUE, figsize = c(19.2,10.8),
   }
 
   img <- png::readPNG(paste(tmp_d, 'test.png', sep = '/'))
-  if(!is_rmarkdown()) {
+  if(interactive()) {
     try(dev.off(),TRUE)
   }
   grid::grid.raster(img)
@@ -229,7 +229,7 @@ plot_confusion_matrix <- function(interp, normalize = FALSE, title = "Confusion 
   fastai2$tabular$all$plt$savefig(paste(tmp_d, 'test.png', sep = '/'), dpi = as.integer(dpi))
 
   img <- png::readPNG(paste(tmp_d, 'test.png', sep = '/'))
-  if(!is_rmarkdown()) {
+  if(interactive()) {
     try(dev.off(),TRUE)
   }
   grid::grid.raster(img)
@@ -260,7 +260,7 @@ plot_loss <- function(object, skip_start = 5, with_valid = TRUE, dpi = 200) {
   fastai2$tabular$all$plt$savefig(paste(tmp_d, 'test.png', sep = '/'), dpi = as.integer(dpi))
 
   img <- png::readPNG(paste(tmp_d, 'test.png', sep = '/'))
-  if(!is_rmarkdown()) {
+  if(interactive()) {
     try(dev.off(),TRUE)
   }
   grid::grid.raster(img)
@@ -289,7 +289,7 @@ plot_lr_find <- function(object, skip_end = 5, dpi = 250) {
   fastai2$tabular$all$plt$savefig(paste(tmp_d, 'test.png', sep = '/'), dpi = as.integer(dpi))
 
   img <- png::readPNG(paste(tmp_d, 'test.png', sep = '/'))
-  if(!is_rmarkdown()) {
+  if(interactive()) {
     try(dev.off(),TRUE)
   }
   grid::grid.raster(img)
@@ -389,7 +389,7 @@ plot <- function(x, y, ..., dpi = 100) {
   fastai2$tabular$all$plt$savefig(paste(tmp_d, 'test.png', sep = '/'), dpi = as.integer(dpi), ...)
 
   img <- png::readPNG(paste(tmp_d, 'test.png', sep = '/'))
-  if(!is_rmarkdown()) {
+  if(interactive()) {
     try(dev.off(),TRUE)
   }
   grid::grid.raster(img)
@@ -427,7 +427,15 @@ show_images <- function(ims, nrows = 1, ncols = NULL,
 
   if(!is.null(ncols)) {
     args$ncols = as.integer(args$ncols)
+  } else {
+    args$ncols <- NULL
   }
+
+  if(is.null(args$titles))
+    args$titles <- NULL
+
+  if(is.null(args$figsize))
+    args$figsize <- NULL
 
 
   do.call(medical()$show_images, args)
@@ -499,6 +507,9 @@ show_results <- function(object, ds_idx = 1, dl = NULL, max_n = 9, shuffle = TRU
     ...
   )
 
+  if(is.null(args$dl))
+    args$dl <- NULL
+
   if(!is.null(args[['vmin']])) {
     args[['vmin']] = as.integer(args[['vmin']])
   }
@@ -536,7 +547,7 @@ show_results <- function(object, ds_idx = 1, dl = NULL, max_n = 9, shuffle = TRU
     fastai2$tabular$all$plt$savefig(paste(tmp_d, 'test.png', sep = '/'), dpi = as.integer(dpi))
 
     img <- png::readPNG(paste(tmp_d, 'test.png', sep = '/'))
-    if(!is_rmarkdown()) {
+    if(interactive()) {
       try(dev.off(),TRUE)
     }
     grid::grid.raster(img)

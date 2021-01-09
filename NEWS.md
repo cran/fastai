@@ -1,5 +1,13 @@
 
-## 2.0.2 (Unreleased)
+## 2.0.3 (Unreleased)
+
+* current stable version of ```fast.ai``` is ```2.1.5```
+* lots of new callback ops
+* [freeze and unfreeze](https://github.com/henry090/fastai/pull/86) a model
+* object detection module - [icevision](https://github.com/henry090/fastai/issues/89)
+* issue with [exporting of a pickle file](https://github.com/henry090/fastai/issues/106)
+
+## 2.0.2 
 
 * Hugging Face integration, prediction
 * ```one_batch()``` ability to add more arguments

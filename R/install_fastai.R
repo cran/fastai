@@ -12,8 +12,13 @@
 #' @export
 install_fastai <- function(version, gpu = FALSE, cuda_version = '10.1', overwrite = FALSE,
                            extra_pkgs = c('kaggle', 'transformers', 'pytorch_lightning', 'timm',
-                                          'catalyst', 'ignite', 'tensorboard', 'fastinference[interp]', 'shap',
-                                          'blurr'), skip_git_pkgs = FALSE) {
+                                          'catalyst', 'ignite', 'fastinference[interp]', 'shap',
+                                          'blurr', 'icevision[all]'), skip_git_pkgs = FALSE) {
+
+  if(missing(version))
+    version2 = '2.1.5'
+  else
+    version2 = version
 
   required_py_pkgs <- c('IPython', 'torch', 'torchvision', 'fastai',
                        'pydicom', 'kornia', 'cv2',
@@ -21,14 +26,8 @@ install_fastai <- function(version, gpu = FALSE, cuda_version = '10.1', overwrit
   # if git is available
   git = try(suppressWarnings(system('which git', intern = TRUE)), TRUE)
 
-  # get os
-  os = switch(Sys.info()[['sysname']],
-              Windows= 'windows',
-              Linux  = 'linux',
-              Darwin = 'mac')
-
-  if(os == 'windows') {
-    extra_pkgs = extra_pkgs[!extra_pkgs %in% 'blurr']
+  if(os() == 'windows' | os() == 'mac') {
+    extra_pkgs = extra_pkgs[!extra_pkgs %in% c('blurr', 'icevision')]
   }
 
   # audio, time-series, cycle-GAN, transformers integration==blurr
@@ -42,14 +41,12 @@ install_fastai <- function(version, gpu = FALSE, cuda_version = '10.1', overwrit
   }
 
 
-  # only linux and mac, fix when https://github.com/fastaudio/fastaudio/issues/71
-  fastaudio_ = function() if (!reticulate::py_module_available('fastaudio') & !skip_git_pkgs) reticulate::py_install('fastaudio', pip = TRUE)
-
   if(length(extra_pkgs) > 0) {
     required_py_pkgs = c(required_py_pkgs, extra_pkgs, git_pkgs)
   }
 
   required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="fastinference[interp]", "fastinference")
+  required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="icevision[all]", "icevision")
 
   res_ = list()
   for (i in 1:length(required_py_pkgs)) {
@@ -75,6 +72,7 @@ install_fastai <- function(version, gpu = FALSE, cuda_version = '10.1', overwrit
   required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="shap", "shap==0.35.0")
   required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="blurr", "ohmeow-blurr")
   required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="fastinference", "fastinference[interp]")
+  required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="icevision", "icevision[all]")
 
   # git pkgs
   #required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="fastaudio", "git+https://github.com/fastaudio/fastaudio.git")
@@ -83,13 +81,25 @@ install_fastai <- function(version, gpu = FALSE, cuda_version = '10.1', overwrit
   required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="upit", "git+https://github.com/tmabraham/UPIT.git")
 
   if(missing(version)) {
-    required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="fastai", "fastai==2.1.8")
+    required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="fastai", "fastai==2.1.5")
   } else {
     required_py_pkgs = replace(required_py_pkgs, required_py_pkgs=="fastai", paste("fastai",version,sep = "=="))
   }
 
+  fastaudio_ = function()  {
+
+    dont_upgr = paste('fastaudio fastai',version2, sep = '==')
+
+    if (!reticulate::py_module_available('fastaudio')) {
+
+      reticulate::py_install(dont_upgr, pip = TRUE)
+
+    }
+
+  }
+
   # kaggle import is different. We cannot check it with py module available.
-  # Insteat try this:
+  # Instead, try this:
   kgg = try(reticulate::import('kaggle'),TRUE)
   kgg = grepl("Could not find kaggle.json", kgg, fixed = TRUE)
 
@@ -144,6 +154,13 @@ install_fastai <- function(version, gpu = FALSE, cuda_version = '10.1', overwrit
   if (!length(required_py_pkgs) == 0) {
 
     if(py_av) {
+
+      # keep current version due to:
+      # ERROR: Could not build wheels for opencv-python-headless which use PEP 517 and cannot be installed directly
+      # Failed to build opencv-python-headless
+      if(!length(required_py_pkgs) == 0) {
+        required_py_pkgs = append(required_py_pkgs,'opencv-python-headless==4.4.0.46')
+      }
 
       if (os %in% 'linux' & !length(required_py_pkgs) == 0) {
         if(os %in% 'linux' & gpu & cuda_version %in% '9.2' & torch_r & !length(required_py_pkgs) == 0) {
@@ -216,3 +233,19 @@ install_fastai <- function(version, gpu = FALSE, cuda_version = '10.1', overwrit
   }
 
 }
+
+
+#' @title Fastai version
+#'
+#'
+#'
+#' @return None
+#' @export
+fastai_version = function() {
+  fastai2$`__version__`
+}
+
+
+
+
+

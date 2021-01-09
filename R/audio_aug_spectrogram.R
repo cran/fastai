@@ -10,7 +10,7 @@
 #' @param pad_mode padding mode, by default `AudioPadType$Zeros`
 #' @return None
 #' @export
-CropTime <- function(duration, pad_mode = AudioPadType$Zeros) {
+CropTime <- function(duration, pad_mode = AudioPadType()$Zeros) {
 
   fastaudio()$augment$spectrogram$CropTime(
     duration = duration,
@@ -40,8 +40,13 @@ MaskFreq <- function(num_masks = 1, size = 20, start = NULL, val = NULL) {
     val = val
   )
 
-  if(!is.null(args[['start']]))
-    args[['start']] = as.integer(args[['start']])
+  if(is.null(args$start))
+    args$start <- NULL
+  else
+    args$start <- as.integer(args$start)
+
+  if(is.null(args$val))
+    args$val <- NULL
 
   do.call(fastaudio()$augment$spectrogram$MaskFreq, args)
 
@@ -68,8 +73,13 @@ MaskTime <- function(num_masks = 1, size = 20, start = NULL, val = NULL) {
     val = val
   )
 
-  if(!is.null(args[['start']]))
-    args[['start']] = as.integer(args[['start']])
+  if(is.null(args$start))
+    args$start <- NULL
+  else
+    args$start <- as.integer(args$start)
+
+  if(is.null(args$val))
+    args$val <- NULL
 
   do.call(fastaudio()$augment$spectrogram$MaskTime, args)
 
