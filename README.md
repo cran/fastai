@@ -14,7 +14,7 @@ and includes "out of the box" support for `vision`, `text`, `tabular`,
 
 <img src="files/fastai.png" width=200 align=right style="margin-left: 15px;" alt="fastai"/>
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
 [![CRAN status](https://www.r-pkg.org/badges/version/fastai)](https://CRAN.R-project.org/package=fastai)
 [![Last month downloads](http://cranlogs.r-pkg.org/badges/last-month/fastai?color=green)](https://cran.r-project.org/package=fastai)
 
@@ -67,6 +67,7 @@ We currently prepare the examples of usage of the fastai from R in Kaggle compet
 - [NLP Binary Classification]
 - [Audio classification]
 - [CycleGAN]
+- [Fastai on Colab TPUs]
 
 > Contributions are very welcome! 
 
@@ -428,7 +429,7 @@ learn %>% fit(2)
 [Computer Vision models](https://github.com/rwightman/pytorch-image-models)?**
 
 There is a function in fastai `timm_learner` which originally written by
-Zachary Mueller.
+[Zachary Mueller]
 It helps to quickly load the pretrained models from
 [timm library](https://github.com/rwightman/pytorch-image-models).
 

@@ -1,5 +1,11 @@
 
-## 2.0.3 (Unreleased)
+## 2.0.4 (Unreleased)
+
+* stick to fastaudio 0.1.3 (resolve dependencies)
+* add ```geom_point``` for interactive visualization within RStudio
+* [add TPU module into fastai](https://colab.research.google.com/drive/1PiBECDM552No-5apVIB8LqUSdSqqJSi-?usp=sharing)
+
+## 2.0.3 
 
 * current stable version of ```fast.ai``` is ```2.1.5```
 * lots of new callback ops

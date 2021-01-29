@@ -1,7 +1,7 @@
 Package: fastai
 Type: Package
 Title: Interface to 'fastai'
-Version: 2.0.3
+Version: 2.0.4
 Authors@R: c(
   person('Turgut', 'Abdullayev', role = c('ctb', 'cre', 'cph', 'aut'),
          email = 'turqut.a.314@gmail.com')
@@ -22,10 +22,10 @@ LazyData: true
 RoxygenNote: 7.1.1
 Imports: reticulate, generics, png, ggplot2, ggpubr, glue
 Suggests: knitr, testthat, rmarkdown, curl, magrittr, data.table,
-        vctrs, stats, utils, R.utils, nandb, viridis, zeallot
+        vctrs, stats, utils, R.utils, viridis, zeallot
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-01-09 09:26:58 UTC; turgut
+Packaged: 2021-01-29 14:21:03 UTC; turgut
 Author: Turgut Abdullayev [ctb, cre, cph, aut]
 Repository: CRAN
-Date/Publication: 2021-01-09 09:50:02 UTC
+Date/Publication: 2021-01-29 14:50:06 UTC
