@@ -135,10 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="intro" class="section level2">
 <h2>Intro</h2>
-<p>The <a href="https://github.com/fastai/fastai">fastai</a> library simplifies training fast and accurate neural nets using modern best practices. See the fastai website to get started. The library is based on research into deep learning best practices undertaken at <code>fast.ai</code>, and includes “out of the box” support for <code>vision</code>, <code>text</code>, <code>tabular</code>, and <code>collab</code> (collaborative filtering) models.</p>
-</div>
-<div id="install-package" class="section level2">
-<h2>Install package</h2>
+<p>First, we need to install <code>timeseries_fastai module</code> for <a href="https://github.com/tcapelle/timeseries_fastai">Time-Series</a> integration.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">py_install</span>(<span class="st">&#39;git+https://github.com/tcapelle/timeseries_fastai.git&#39;</span>, <span class="at">pip =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="grab-data" class="section level2">

@@ -7,9 +7,7 @@ The fastai library simplifies training fast and accurate neural nets using
 modern best practices. See the
 [fastai website](https://henry090.github.io/fastai/) to get started. The library
 is based on research into deep learning best practices undertaken at `fast.ai`,
-and includes "out of the box" support for `vision`, `text`, `tabular`,
-[audio](https://github.com/fastaudio/fastaudio),
-[time-series](https://github.com/tcapelle/timeseries_fastai), [object detection](https://github.com/airctic/icevision) and `collab`
+and includes "out of the box" support for `vision`, `text`, `tabular`, and `collab`
 (collaborative filtering) models.
 
 <img src="files/fastai.png" width=200 align=right style="margin-left: 15px;" alt="fastai"/>
@@ -31,16 +29,11 @@ and includes "out of the box" support for `vision`, `text`, `tabular`,
 
 ## Installation
 
-Requirements:
-
-- Python >= 3.6
-- CPU or GPU
-
 **1. Install miniconda and activate environment:**
 
 ```
 reticulate::install_miniconda()
-reticulate::py_config()
+reticulate::conda_create('r-reticulate')
 ```
 
 **2. The dev version:**
@@ -52,22 +45,30 @@ devtools::install_github('henry090/fastai')
 **3. Later, you need to install the python module `fastai`:**
 
 ```
-install_fastai(gpu = FALSE, cuda_version = '10.1', overwrite = FALSE)
+fastai::install_fastai(gpu = FALSE, cuda_version = '10.1', overwrite = FALSE)
 ```
 
 
 **4. Restart RStudio!**
 
+## fast.ai extensions:
+
+1. [NLP, Transformers](https://github.com/ohmeow/blurr)
+2. [Object Detection](https://github.com/airctic/icevision)
+3. [Time-series](https://github.com/tcapelle/timeseries_fastai)
+4. [CycleGAN](https://github.com/tmabraham/UPIT)
+5. [Audio](https://github.com/fastaudio/fastaudio)
+
 ## Kaggle
 
 We currently prepare the examples of usage of the fastai from R in Kaggle competitions:
 
-- [Introduction]
-- [MNIST with Pytorch and fastai]
-- [NLP Binary Classification]
-- [Audio classification]
-- [CycleGAN]
-- [Fastai on Colab TPUs]
+- [Introduction](https://www.kaggle.com/henry090/r-interface-to-fastai)
+- [MNIST with Pytorch and fastai](https://www.kaggle.com/henry090/r-and-fastai)
+- [NLP Binary Classification](https://www.kaggle.com/henry090/r-fastai-and-transformers)
+- [Audio classification](https://www.kaggle.com/henry090/fast-ai-from-r)
+- [CycleGAN](https://www.kaggle.com/henry090/r-fast-ai-and-cyclegan)
+- [Fastai on Colab TPUs](https://colab.research.google.com/drive/1PiBECDM552No-5apVIB8LqUSdSqqJSi-?usp=sharing)
 
 > Contributions are very welcome! 
 
@@ -429,7 +430,7 @@ learn %>% fit(2)
 [Computer Vision models](https://github.com/rwightman/pytorch-image-models)?**
 
 There is a function in fastai `timm_learner` which originally written by
-[Zachary Mueller]
+[Zachary Mueller](https://github.com/walkwithfastai/walkwithfastai.github.io/).
 It helps to quickly load the pretrained models from
 [timm library](https://github.com/rwightman/pytorch-image-models).
 

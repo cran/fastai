@@ -1,5 +1,10 @@
 
-## 2.0.4 (Unreleased)
+## 2.0.5 
+
+- ```install_fastai``` no more supports extensions. They need to be installed separately by users.
+- PyTorch was upgraded from 1.7.0 to 1.7.1.
+
+## 2.0.4 
 
 * stick to fastaudio 0.1.3 (resolve dependencies)
 * add ```geom_point``` for interactive visualization within RStudio

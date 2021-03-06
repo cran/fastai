@@ -1,7 +1,7 @@
 Package: fastai
 Type: Package
 Title: Interface to 'fastai'
-Version: 2.0.4
+Version: 2.0.5
 Authors@R: c(
   person('Turgut', 'Abdullayev', role = c('ctb', 'cre', 'cph', 'aut'),
          email = 'turqut.a.314@gmail.com')
@@ -25,7 +25,7 @@ Suggests: knitr, testthat, rmarkdown, curl, magrittr, data.table,
         vctrs, stats, utils, R.utils, viridis, zeallot
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-01-29 14:21:03 UTC; turgut
+Packaged: 2021-03-06 07:16:38 UTC; turgut
 Author: Turgut Abdullayev [ctb, cre, cph, aut]
 Repository: CRAN
-Date/Publication: 2021-01-29 14:50:06 UTC
+Date/Publication: 2021-03-06 23:50:11 UTC
