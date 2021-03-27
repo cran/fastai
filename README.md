@@ -5,14 +5,14 @@ The fastai package provides R wrappers to
 
 The fastai library simplifies training fast and accurate neural nets using
 modern best practices. See the
-[fastai website](https://henry090.github.io/fastai/) to get started. The library
+[fastai website](https://eagerai.github.io/fastai/) to get started. The library
 is based on research into deep learning best practices undertaken at `fast.ai`,
 and includes "out of the box" support for `vision`, `text`, `tabular`, and `collab`
 (collaborative filtering) models.
 
 <img src="files/fastai.png" width=200 align=right style="margin-left: 15px;" alt="fastai"/>
 
-
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN status](https://www.r-pkg.org/badges/version/fastai)](https://CRAN.R-project.org/package=fastai)
 [![Last month downloads](http://cranlogs.r-pkg.org/badges/last-month/fastai?color=green)](https://cran.r-project.org/package=fastai)
 
@@ -25,7 +25,6 @@ and includes "out of the box" support for `vision`, `text`, `tabular`, and `coll
 | **Focal**         | ![ubuntu_20](https://github.com/henry090/fastai/workflows/ubuntu_20/badge.svg) |
 | **Mac OS**        | ![mac_os](https://github.com/henry090/fastai/workflows/mac_os/badge.svg)       |
 | **Windows**       | ![windows](https://github.com/henry090/fastai/workflows/windows/badge.svg)     |
-| **Documentation** | ![docs](https://github.com/henry090/fastai/workflows/docs/badge.svg)           |
 
 ## Installation
 
@@ -39,7 +38,7 @@ reticulate::conda_create('r-reticulate')
 **2. The dev version:**
 
 ```
-devtools::install_github('henry090/fastai')
+devtools::install_github('eagerai/fastai')
 ```
 
 **3. Later, you need to install the python module `fastai`:**
