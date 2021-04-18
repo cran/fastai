@@ -1,6 +1,6 @@
-1b2d985b3a2e9e8f81c185e4fea51bfc *DESCRIPTION
+35e226c619f1ae34a385b153751f3291 *DESCRIPTION
 6a48013e590b7af404a577c2f4a865ac *NAMESPACE
-c04458e2187a32e5545d1fadb01bf3c2 *NEWS.md
+f52b7e07147018740307902df279cc82 *NEWS.md
 b4b56ad7eaee7044fd11c055dcc71079 *R/GAN.R
 0165c869a6c501e9a68526e91bd8f043 *R/Learner_fits.R
 a5e21f4a5127b1d2bdc8b31c5e6cbd5a *R/Loss.R
@@ -62,7 +62,7 @@ b9e4286afa262204a79ba8eecb8e4dfc *R/metric.R
 00ee3f21a88131a2eea3fe19eb9575eb *R/tabular.R
 9c9c9873df8055a18f5b19e74698e87d *R/tabular_model.R
 8cbb201cfee514868998193c634b9203 *R/tabular_transform.R
-aec2360306e0b3162f874671af43ec6f *R/test.R
+b31d34c437095d2a017b37d71512ede3 *R/test.R
 1bd88a9e78a4d9c2d582c6923f08ebb1 *R/text_core.R
 7e67486846170019eb6a7a4bd7625dc0 *R/text_data.R
 b208dfc43aaa6f7ffd2e51c2a6349d80 *R/text_learner.R
@@ -154,7 +154,7 @@ ace1e67e97c40182b21b509ba68b4b5d *inst/doc/time_series.Rmd
 b0c1a9dae44f8b7ba211b2a37a2ab3a7 *inst/doc/time_series.html
 0ecefda4e64b14449009fb62b56bbe1f *inst/python/fastaibuilt/Module_test.py
 1c7c220be9f114566c861f2d4fd2797d *inst/python/fastaibuilt/Transformer.py
-9bc39c9920db0a0064e593ad867f70c8 *inst/python/fastaibuilt/bs_finder.py
+ce278b987aaa8976c42e349c917e03b1 *inst/python/fastaibuilt/bs_finder.py
 95392c361aaefeb4f00f392ae5fc3d6a *inst/python/fastaibuilt/crappify.py
 98436b4e2a2284e5d49f72f252d252f0 *inst/python/fastaibuilt/custom_loss.py
 2944233803ce2fcdb8147786d3d0cb2e *inst/python/fastaibuilt/migrating_catalyst.py
@@ -963,10 +963,10 @@ ccc44f1b375cca8851d82b57de04dd23 *man/partial.Rd
 699c33716799f1d23c6a20f3e397d01a *man/pca.Rd
 65f66a1397087686c6c4647895d7030a *man/plot.Rd
 de49975ca9bc2ac8ae8e08e4b3880451 *man/plot_bs_find.Rd
-8cca43f3cc5d2869bc7f11dbf3738873 *man/plot_confusion_matrix.Rd
+6b69f8975575a4013a19d66e1f4a36cf *man/plot_confusion_matrix.Rd
 56e47a65b7d16c6ebb58d4c6a0bb5b95 *man/plot_loss.Rd
 6fccfbf1bb6b04e7c3e72dcd2b95419e *man/plot_lr_find.Rd
-a21f29166c01f8f96963fa5899938d36 *man/plot_top_losses.Rd
+8004588cae28fb16f38d2bd7f73c62fc *man/plot_top_losses.Rd
 8c3347ff3d71453b33a11c6e6f5603d8 *man/plus-.fastai.torch_core.TensorMask.Rd
 76ce4b689122628f2df322741f66c23e *man/plus-.torch.nn.modules.container.Sequential.Rd
 c9c074ca736060e5bee526f4633b82e8 *man/pow-.fastai.torch_core.TensorMask.Rd
@@ -1016,7 +1016,7 @@ d167ed655d3fee0420a553388bb82caa *man/set_item_pg.Rd
 2bbf58f539ce137427a5521cfc3cc035 *man/shape.Rd
 c24476d515883e95a6395710f8981813 *man/show.Rd
 1b428febda11d935d4d6a2a56e87efbc *man/show_array.Rd
-d638990e29c8598ee2d27d4ed13fef45 *man/show_batch.Rd
+5a349f2d1a4bec673a2d20fe7c48dc05 *man/show_batch.Rd
 5c74e3bc0acff939b95aad51f94cb5fb *man/show_image.Rd
 034d683f508b079abc6bd6dc96be95d8 *man/show_images.Rd
 66bd5295b442fc64e35806152d1d9b6f *man/show_preds.Rd
@@ -1141,7 +1141,7 @@ fa4a37b659491ec338a8b90aa7fd3378 *man/xsenet154.Rd
 17c3d9a30822e52bc04460712f9ca117 *man/zoom.Rd
 3dacce116e68fa7dabb01212c2b19489 *man/zoom_mat.Rd
 cdfb6a3fb09c6f3054af5ec9c7600d10 *tests/testthat.R
-1bfefb0b8d0d1d271b5dce4bf8dd175b *tests/testthat/test-experimental.R
+23d977df6ff30c8d998fe6fe6d9712f2 *tests/testthat/test-collab.R
 e80bee26ecb4520ac33eb165075c41a3 *tests/testthat/utils.R
 f435739ada078bb0967962f963bffc93 *vignettes/Basic_Tabular.Rmd
 6fbc5b3297c7b7924bf6ba2a736af745 *vignettes/audio.Rmd
