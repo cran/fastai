@@ -1,4 +1,8 @@
 
+## 2.0.8
+
+- minor bugs are fixed
+
 ## 2.0.7
 
 - bs_finder is fixed
