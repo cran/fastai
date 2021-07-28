@@ -1,7 +1,13 @@
 
+## 2.0.9
+
+- PyTorch version is 1.9
+- lr_find bug is fixed
+
+
 ## 2.0.8
 
-- minor bugs are fixed
+- minor fixes
 
 ## 2.0.7
 

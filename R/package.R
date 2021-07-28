@@ -88,6 +88,8 @@ fix_fit = function(disable_graph = FALSE) {
         invisible(try(set_theme(), TRUE))
 
       } else {
+        utils::flush.console()
+
         ## restore from temp
         tmm = tempdir()
         tmp_name = paste(tmm,"output.txt",sep = '/')
