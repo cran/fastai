@@ -350,15 +350,15 @@ neural networks in PyTorch flexibly and transparently.</p>
 </div>
 <div id="ignite-with-fastai" class="section level2">
 <h2>Ignite with fastai</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">Data_Loaders</span>(<span class="fu">get_data_loaders</span>(<span class="dv">64</span>, <span class="dv">128</span>))<span class="sc">$</span><span class="fu">cuda</span>()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>nn <span class="ot">=</span> <span class="fu">nn</span>()</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>opt_func <span class="ot">=</span> <span class="fu">partial</span>(SGD, <span class="at">momentum=</span><span class="fl">0.5</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(data, <span class="fu">Net</span>(), <span class="at">loss_func =</span> nn<span class="sc">$</span><span class="fu">NLLLoss</span>(), <span class="at">opt_func =</span> opt_func, <span class="at">metrics =</span> accuracy)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">1</span>, <span class="fl">0.01</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">Data_Loaders</span>(<span class="fu">get_data_loaders</span>(<span class="dv">64</span>, <span class="dv">128</span>))<span class="sc">$</span><span class="fu">cuda</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>nn <span class="ot">=</span> <span class="fu">nn</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>opt_func <span class="ot">=</span> <span class="fu">partial</span>(SGD, <span class="at">momentum=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(data, <span class="fu">Net</span>(), <span class="at">loss_func =</span> nn<span class="sc">$</span><span class="fu">NLLLoss</span>(), <span class="at">opt_func =</span> opt_func, <span class="at">metrics =</span> accuracy)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">1</span>, <span class="fl">0.01</span>)</span></code></pre></div>
 <pre><code>epoch     train_loss  valid_loss  accuracy  time    
 0         1.084753    0.908347    0.826600  00:13  </code></pre>
 </div>

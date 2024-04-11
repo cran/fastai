@@ -353,17 +353,17 @@ loop. Break the cycle - use the Catalyst!</p>
 <div id="catalyst-with-fastai" class="section level2">
 <h2>Catalyst with fastai</h2>
 <p>Specify loaders from catalyst dict:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>loaders <span class="ot">=</span> <span class="fu">loaders</span>()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">Data_Loaders</span>(loaders[<span class="st">&#39;train&#39;</span>], loaders[<span class="st">&#39;valid&#39;</span>])<span class="sc">$</span><span class="fu">cuda</span>()</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>nn <span class="ot">=</span> <span class="fu">nn</span>()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> nn<span class="sc">$</span><span class="fu">Sequential</span>() <span class="sc">+</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  nn<span class="sc">$</span><span class="fu">Flatten</span>() <span class="sc">+</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  nn<span class="sc">$</span><span class="fu">Linear</span>(28L <span class="sc">*</span> 28L, 10L)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>loaders <span class="ot">=</span> <span class="fu">loaders</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">Data_Loaders</span>(loaders[<span class="st">&#39;train&#39;</span>], loaders[<span class="st">&#39;valid&#39;</span>])<span class="sc">$</span><span class="fu">cuda</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>nn <span class="ot">=</span> <span class="fu">nn</span>()</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>model <span class="ot">=</span> nn<span class="sc">$</span><span class="fu">Sequential</span>() <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  nn<span class="sc">$</span><span class="fu">Flatten</span>() <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  nn<span class="sc">$</span><span class="fu">Linear</span>(28L <span class="sc">*</span> 28L, 10L)</span></code></pre></div>
 <p>Output:</p>
 <pre><code>Sequential(
   (0): Flatten()
@@ -372,11 +372,11 @@ loop. Break the cycle - use the Catalyst!</p>
 </div>
 <div id="fit" class="section level2">
 <h2>Fit</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">=</span> <span class="fu">list</span>(accuracy,top_k_accuracy)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(data, model, <span class="at">loss_func =</span> nn<span class="sc">$</span>functional<span class="sc">$</span>cross_entropy, <span class="at">opt_func =</span> Adam,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">metrics =</span> metrics)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">1</span>, <span class="fl">0.02</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>metrics <span class="ot">=</span> <span class="fu">list</span>(accuracy,top_k_accuracy)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(data, model, <span class="at">loss_func =</span> nn<span class="sc">$</span>functional<span class="sc">$</span>cross_entropy, <span class="at">opt_func =</span> Adam,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>                <span class="at">metrics =</span> metrics)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">1</span>, <span class="fl">0.02</span>)</span></code></pre></div>
 <pre><code>epoch     train_loss  valid_loss  accuracy  top_k_accuracy  time    
 0         0.269411    0.336529    0.910200  0.993700        00:08   </code></pre>
 </div>

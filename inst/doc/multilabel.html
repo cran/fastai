@@ -349,38 +349,38 @@ integration.</p>
 <div id="multilabel" class="section level2">
 <h2>Multilabel</h2>
 <p>Grab data and take 1 % for fast training:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">HF_load_dataset</span>(<span class="st">&#39;civil_comments&#39;</span>, <span class="at">split=</span><span class="st">&#39;train[:1%]&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">HF_load_dataset</span>(<span class="st">&#39;civil_comments&#39;</span>, <span class="at">split=</span><span class="st">&#39;train[:1%]&#39;</span>)</span></code></pre></div>
 </div>
 <div id="preprocess" class="section level2">
 <h2>Preprocess</h2>
 <p>Select multiple outputs/columns:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> data.table<span class="sc">::</span><span class="fu">as.data.table</span>(df)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>lbl_cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;severe_toxicity&#39;</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;obscene&#39;</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;threat&#39;</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;insult&#39;</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;identity_attack&#39;</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;sexual_explicit&#39;</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[,(lbl_cols) <span class="sc">:</span><span class="er">=</span> <span class="fu">round</span>(.SD,<span class="dv">0</span>), .SDcols<span class="ot">=</span>lbl_cols]</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[, (lbl_cols) <span class="sc">:</span><span class="er">=</span> <span class="fu">lapply</span>(.SD, as.integer), .SDcols<span class="ot">=</span>lbl_cols]</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>df <span class="ot">=</span> data.table<span class="sc">::</span><span class="fu">as.data.table</span>(df)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>lbl_cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;severe_toxicity&#39;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>             <span class="st">&#39;obscene&#39;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>             <span class="st">&#39;threat&#39;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>             <span class="st">&#39;insult&#39;</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>             <span class="st">&#39;identity_attack&#39;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>             <span class="st">&#39;sexual_explicit&#39;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[,(lbl_cols) <span class="sc">:=</span> <span class="fu">round</span>(.SD,<span class="dv">0</span>), .SDcols<span class="ot">=</span>lbl_cols]</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[, (lbl_cols) <span class="sc">:=</span> <span class="fu">lapply</span>(.SD, as.integer), .SDcols<span class="ot">=</span>lbl_cols]</span></code></pre></div>
 </div>
 <div id="pretrained-model" class="section level2">
 <h2>Pretrained model</h2>
 <p>Load distill RoBERTa:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>task <span class="ot">=</span> <span class="fu">HF_TASKS_ALL</span>()<span class="sc">$</span>SequenceClassification</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pretrained_model_name <span class="ot">=</span> <span class="st">&quot;distilroberta-base&quot;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>config <span class="ot">=</span> <span class="fu">AutoConfig</span>()<span class="sc">$</span><span class="fu">from_pretrained</span>(pretrained_model_name)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>config<span class="sc">$</span>num_labels <span class="ot">=</span> <span class="fu">length</span>(lbl_cols)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(hf_arch, hf_config, hf_tokenizer, hf_model) <span class="sc">%&lt;-%</span> <span class="fu">get_hf_objects</span>(pretrained_model_name,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                                                                               <span class="at">task=</span>task,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                                                                               <span class="at">config=</span>config)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>task <span class="ot">=</span> <span class="fu">HF_TASKS_ALL</span>()<span class="sc">$</span>SequenceClassification</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>pretrained_model_name <span class="ot">=</span> <span class="st">&quot;distilroberta-base&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>config <span class="ot">=</span> <span class="fu">AutoConfig</span>()<span class="sc">$</span><span class="fu">from_pretrained</span>(pretrained_model_name)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>config<span class="sc">$</span>num_labels <span class="ot">=</span> <span class="fu">length</span>(lbl_cols)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">c</span>(hf_arch, hf_config, hf_tokenizer, hf_model) <span class="sc">%&lt;-%</span> <span class="fu">get_hf_objects</span>(pretrained_model_name,</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>                                                                               <span class="at">task=</span>task,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>                                                                               <span class="at">config=</span>config)</span></code></pre></div>
 <pre><code>Downloading: 100%|██████████| 899k/899k [00:00&lt;00:00, 961kB/s]
 Downloading: 100%|██████████| 456k/456k [00:00&lt;00:00, 597kB/s]
 Downloading: 100%|██████████| 331M/331M [03:26&lt;00:00, 1.61MB/s]</code></pre>
@@ -388,18 +388,18 @@ Downloading: 100%|██████████| 331M/331M [03:26&lt;00:00, 1.6
 <div id="datablock" class="section level2">
 <h2>Datablock</h2>
 <p>Create data blocks:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>blocks <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">HF_TextBlock</span>(<span class="at">hf_arch=</span>hf_arch, <span class="at">hf_tokenizer=</span>hf_tokenizer),</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">MultiCategoryBlock</span>(<span class="at">encoded=</span><span class="cn">TRUE</span>, <span class="at">vocab=</span>lbl_cols)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>dblock <span class="ot">=</span> <span class="fu">DataBlock</span>(<span class="at">blocks=</span>blocks,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">get_x=</span><span class="fu">ColReader</span>(<span class="st">&#39;text&#39;</span>), <span class="at">get_y=</span><span class="fu">ColReader</span>(lbl_cols),</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">splitter=</span><span class="fu">RandomSplitter</span>())</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>dls <span class="ot">=</span> dblock <span class="sc">%&gt;%</span> <span class="fu">dataloaders</span>(df, <span class="at">bs=</span><span class="dv">8</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>dls <span class="sc">%&gt;%</span> <span class="fu">one_batch</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>blocks <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">HF_TextBlock</span>(<span class="at">hf_arch=</span>hf_arch, <span class="at">hf_tokenizer=</span>hf_tokenizer),</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">MultiCategoryBlock</span>(<span class="at">encoded=</span><span class="cn">TRUE</span>, <span class="at">vocab=</span>lbl_cols)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>dblock <span class="ot">=</span> <span class="fu">DataBlock</span>(<span class="at">blocks=</span>blocks,</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>                   <span class="at">get_x=</span><span class="fu">ColReader</span>(<span class="st">&#39;text&#39;</span>), <span class="at">get_y=</span><span class="fu">ColReader</span>(lbl_cols),</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>                   <span class="at">splitter=</span><span class="fu">RandomSplitter</span>())</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>dls <span class="ot">=</span> dblock <span class="sc">%&gt;%</span> <span class="fu">dataloaders</span>(df, <span class="at">bs=</span><span class="dv">8</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>dls <span class="sc">%&gt;%</span> <span class="fu">one_batch</span>()</span></code></pre></div>
 <pre><code>[[1]]
 [[1]]$input_ids
 tensor([[    0, 24268,  5257,  ...,     1,     1,     1],
@@ -432,21 +432,21 @@ TensorMultiCategory([[0., 0., 0., 0., 0., 0.],
 </div>
 <div id="model" class="section level2">
 <h2>Model</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">HF_BaseModelWrapper</span>(hf_model)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(dls,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                model,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">opt_func=</span><span class="fu">partial</span>(Adam),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">loss_func=</span><span class="fu">BCEWithLogitsLossFlat</span>(),</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">metrics=</span><span class="fu">partial</span>(<span class="fu">accuracy_multi</span>(), <span class="at">thresh=</span><span class="fl">0.2</span>),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">cbs=</span><span class="fu">HF_BaseModelCallback</span>(),</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">splitter=</span><span class="fu">hf_splitter</span>())</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>learn<span class="sc">$</span>loss_func<span class="sc">$</span>thresh <span class="ot">=</span> <span class="fl">0.2</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>learn<span class="sc">$</span><span class="fu">create_opt</span>()             <span class="co"># -&gt; will create your layer groups based on your &quot;splitter&quot; function</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>learn<span class="sc">$</span><span class="fu">freeze</span>()</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">HF_BaseModelWrapper</span>(hf_model)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(dls,</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>                model,</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>                <span class="at">opt_func=</span><span class="fu">partial</span>(Adam),</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>                <span class="at">loss_func=</span><span class="fu">BCEWithLogitsLossFlat</span>(),</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>                <span class="at">metrics=</span><span class="fu">partial</span>(<span class="fu">accuracy_multi</span>(), <span class="at">thresh=</span><span class="fl">0.2</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>                <span class="at">cbs=</span><span class="fu">HF_BaseModelCallback</span>(),</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>                <span class="at">splitter=</span><span class="fu">hf_splitter</span>())</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>learn<span class="sc">$</span>loss_func<span class="sc">$</span>thresh <span class="ot">=</span> <span class="fl">0.2</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>learn<span class="sc">$</span><span class="fu">create_opt</span>()             <span class="co"># -&gt; will create your layer groups based on your &quot;splitter&quot; function</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>learn<span class="sc">$</span><span class="fu">freeze</span>()</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code></pre></div>
 <p>See summary:</p>
 <pre><code>epoch   train_loss   valid_loss   accuracy_multi   time  
 ------  -----------  -----------  ---------------  ------
@@ -621,17 +621,17 @@ Callbacks:
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
 <p>Finally, fit the model:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lrs <span class="ot">=</span> learn <span class="sc">%&gt;%</span> <span class="fu">lr_find</span>(<span class="at">suggestions=</span><span class="cn">TRUE</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">1</span>, <span class="at">lr_max=</span><span class="fl">1e-2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>lrs <span class="ot">=</span> learn <span class="sc">%&gt;%</span> <span class="fu">lr_find</span>(<span class="at">suggestions=</span><span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">1</span>, <span class="at">lr_max=</span><span class="fl">1e-2</span>)</span></code></pre></div>
 <pre><code>epoch   train_loss   valid_loss   accuracy_multi   time  
 ------  -----------  -----------  ---------------  ------
 0       0.040617     0.034286     0.993257         01:21 </code></pre>
 <p>Predict:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>learn<span class="sc">$</span>loss_func<span class="sc">$</span>thresh <span class="ot">=</span> <span class="fl">0.02</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">predict</span>(<span class="st">&quot;Those damned affluent white people should only eat their own food, like cod cakes and boiled potatoes.</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">No enchiladas for them!&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>learn<span class="sc">$</span>loss_func<span class="sc">$</span>thresh <span class="ot">=</span> <span class="fl">0.02</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">predict</span>(<span class="st">&quot;Those damned affluent white people should only eat their own food, like cod cakes and boiled potatoes.</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="st">No enchiladas for them!&quot;</span>)</span></code></pre></div>
 <pre><code>$probabilities
   severe_toxicity     obscene       threat     insult identity_attack sexual_explicit
 1    9.302437e-07 0.004268706 0.0007849637 0.02687055     0.003282947      0.00232468

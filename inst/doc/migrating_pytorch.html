@@ -345,16 +345,16 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </center>
 <div id="plain-pytorch-with-fastai" class="section level2">
 <h2>Plain Pytorch with fastai</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">Data_Loaders</span>(train_loader, test_loader)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>nn <span class="ot">=</span> <span class="fu">nn</span>()</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(data, <span class="fu">Net</span>(), <span class="at">loss_func =</span> nn<span class="sc">$</span>functional<span class="sc">$</span>nll_loss, </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">opt_func =</span> <span class="fu">Adam</span>(), <span class="at">metrics =</span> accuracy, <span class="at">cbs =</span> <span class="fu">CudaCallback</span>())</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">1</span>, <span class="fl">1e-2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">Data_Loaders</span>(train_loader, test_loader)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>nn <span class="ot">=</span> <span class="fu">nn</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(data, <span class="fu">Net</span>(), <span class="at">loss_func =</span> nn<span class="sc">$</span>functional<span class="sc">$</span>nll_loss, </span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>                <span class="at">opt_func =</span> <span class="fu">Adam</span>(), <span class="at">metrics =</span> accuracy, <span class="at">cbs =</span> <span class="fu">CudaCallback</span>())</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">1</span>, <span class="fl">1e-2</span>)</span></code></pre></div>
 </div>
 
 

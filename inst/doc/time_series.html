@@ -345,15 +345,15 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>First, we need to install <code>timeseries_fastai module</code> for
 <a href="https://github.com/tcapelle/timeseries_fastai">Time-Series</a>
 integration.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">py_install</span>(<span class="st">&#39;git+https://github.com/tcapelle/timeseries_fastai.git&#39;</span>, <span class="at">pip =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">py_install</span>(<span class="st">&#39;git+https://github.com/tcapelle/timeseries_fastai.git&#39;</span>, <span class="at">pip =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="grab-data" class="section level2">
 <h2>Grab data</h2>
 <p>Download the data from Facebook Github page (Prophet):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="st">&#39;https://raw.githubusercontent.com/facebook/prophet/master/examples/example_wp_log_peyton_manning.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">library</span>(fastai)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>df <span class="ot">=</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="st">&#39;https://raw.githubusercontent.com/facebook/prophet/master/examples/example_wp_log_peyton_manning.csv&#39;</span>)</span></code></pre></div>
 <pre><code>           ds        y
 1: 2007-12-10 9.590761
 2: 2007-12-11 8.519590
@@ -365,17 +365,17 @@ integration.</p>
 <div id="preprocess" class="section level2">
 <h2>Preprocess</h2>
 <p>Scale and fill NA’s:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>split_idx <span class="ot">=</span> <span class="fu">which</span>(df<span class="sc">$</span>ds<span class="sc">==</span><span class="st">&#39;2016-01-01&#39;</span>) <span class="co"># take 1 year for validation</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> df<span class="sc">$</span>y</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> timetk<span class="sc">::</span><span class="fu">tk_augment_timeseries_signature</span>(df) <span class="sc">%&gt;%</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.factor,  as.numeric) <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ds, <span class="sc">-</span>hour, <span class="sc">-</span>minute, <span class="sc">-</span>second, <span class="sc">-</span>hour12, <span class="sc">-</span>am.pm, <span class="sc">-</span>y) <span class="sc">%&gt;%</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span> data.table<span class="sc">::</span><span class="fu">as.data.table</span>()</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>df[<span class="fu">is.na</span>(df)]<span class="ot">=</span><span class="dv">0</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>y <span class="ot">=</span> y</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>split_idx <span class="ot">=</span> <span class="fu">which</span>(df<span class="sc">$</span>ds<span class="sc">==</span><span class="st">&#39;2016-01-01&#39;</span>) <span class="co"># take 1 year for validation</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>y <span class="ot">=</span> df<span class="sc">$</span>y</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>df <span class="ot">=</span> timetk<span class="sc">::</span><span class="fu">tk_augment_timeseries_signature</span>(df) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.factor,  as.numeric) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ds, <span class="sc">-</span>hour, <span class="sc">-</span>minute, <span class="sc">-</span>second, <span class="sc">-</span>hour12, <span class="sc">-</span>am.pm, <span class="sc">-</span>y) <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span> data.table<span class="sc">::</span><span class="fu">as.data.table</span>()</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>df[<span class="fu">is.na</span>(df)]<span class="ot">=</span><span class="dv">0</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>df<span class="sc">$</span>y <span class="ot">=</span> y</span></code></pre></div>
 </div>
 <div id="split" class="section level2">
 <h2>Split</h2>
@@ -384,21 +384,21 @@ integration.</p>
 <li>train</li>
 <li>test</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="ot">=</span> df[<span class="dv">1</span><span class="sc">:</span>split_idx,]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="ot">=</span> df[(split_idx<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span><span class="fu">nrow</span>(df),]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x_cols <span class="ot">=</span> <span class="fu">setdiff</span>(<span class="fu">colnames</span>(df_train),<span class="st">&#39;y&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>df_train <span class="ot">=</span> df[<span class="dv">1</span><span class="sc">:</span>split_idx,]</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>df_test <span class="ot">=</span> df[(split_idx<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span><span class="fu">nrow</span>(df),]</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>x_cols <span class="ot">=</span> <span class="fu">setdiff</span>(<span class="fu">colnames</span>(df_train),<span class="st">&#39;y&#39;</span>)</span></code></pre></div>
 </div>
 <div id="dataloader-and-inception-model" class="section level2">
 <h2>Dataloader and Inception model</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dls <span class="ot">=</span> <span class="fu">TSDataLoaders_from_dfs</span>(df_train, df_test, <span class="at">x_cols =</span> x_cols, <span class="at">label_col =</span> <span class="st">&#39;y&#39;</span>, <span class="at">bs=</span><span class="dv">60</span>,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">y_block =</span> <span class="fu">RegressionBlock</span>())</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>dls <span class="sc">%&gt;%</span> <span class="fu">show_batch</span>()</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>inception <span class="ot">=</span> <span class="fu">create_inception</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(dls, inception, <span class="at">metrics=</span><span class="fu">list</span>(<span class="fu">mae</span>(), <span class="fu">rmse</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>dls <span class="ot">=</span> <span class="fu">TSDataLoaders_from_dfs</span>(df_train, df_test, <span class="at">x_cols =</span> x_cols, <span class="at">label_col =</span> <span class="st">&#39;y&#39;</span>, <span class="at">bs=</span><span class="dv">60</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>                             <span class="at">y_block =</span> <span class="fu">RegressionBlock</span>())</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>dls <span class="sc">%&gt;%</span> <span class="fu">show_batch</span>()</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>inception <span class="ot">=</span> <span class="fu">create_inception</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(dls, inception, <span class="at">metrics=</span><span class="fu">list</span>(<span class="fu">mae</span>(), <span class="fu">rmse</span>()))</span></code></pre></div>
 <pre><code>Sequential(
   (0): SequentialEx(
     (layers): ModuleList(
@@ -548,16 +548,16 @@ integration.</p>
 <div id="optimal-lr" class="section level2">
 <h2>Optimal LR</h2>
 <p>Find suitable learning rate and plot:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lrs <span class="ot">=</span> learn <span class="sc">%&gt;%</span> <span class="fu">lr_find</span>()</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">plot_lr_find</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>lrs <span class="ot">=</span> learn <span class="sc">%&gt;%</span> <span class="fu">lr_find</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">plot_lr_find</span>()</span></code></pre></div>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
 <p>Fit and include early stopping:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">30</span>, <span class="fl">1e-5</span>, <span class="at">cbs =</span> <span class="fu">EarlyStoppingCallback</span>(<span class="at">patience =</span> <span class="dv">5</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">predict</span>(df_test)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">30</span>, <span class="fl">1e-5</span>, <span class="at">cbs =</span> <span class="fu">EarlyStoppingCallback</span>(<span class="at">patience =</span> <span class="dv">5</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">predict</span>(df_test)</span></code></pre></div>
 <pre><code>          y
 1  5.925275
 2  5.925579

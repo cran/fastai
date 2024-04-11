@@ -348,51 +348,51 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="dataset" class="section level2">
 <h2>Dataset</h2>
 <p>Grab data from TensorFlow Speech Commands (2.3 GB):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>commands_path <span class="ot">=</span> <span class="st">&quot;SPEECHCOMMANDS&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>audio_files <span class="ot">=</span> <span class="fu">get_audio_files</span>(commands_path)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(audio_files<span class="sc">$</span>items)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 105835</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>commands_path <span class="ot">=</span> <span class="st">&quot;SPEECHCOMMANDS&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>audio_files <span class="ot">=</span> <span class="fu">get_audio_files</span>(commands_path)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">length</span>(audio_files<span class="sc">$</span>items)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co"># [1] 105835</span></span></code></pre></div>
 </div>
 <div id="preprocess" class="section level2">
 <h2>Preprocess</h2>
 <p>Prepare dataset and put into data loader:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>DBMelSpec <span class="ot">=</span> <span class="fu">SpectrogramTransformer</span>(<span class="at">mel=</span><span class="cn">TRUE</span>, <span class="at">to_db=</span><span class="cn">TRUE</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>a2s <span class="ot">=</span> <span class="fu">DBMelSpec</span>()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>crop_4000ms <span class="ot">=</span> <span class="fu">ResizeSignal</span>(<span class="dv">4000</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>tfms <span class="ot">=</span> <span class="fu">list</span>(crop_4000ms, a2s)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>auds <span class="ot">=</span> <span class="fu">DataBlock</span>(<span class="at">blocks =</span> <span class="fu">list</span>(<span class="fu">AudioBlock</span>(), <span class="fu">CategoryBlock</span>()),  </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">get_items =</span> get_audio_files, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">splitter =</span> <span class="fu">RandomSplitter</span>(),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">item_tfms =</span> tfms,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">get_y =</span> parent_label)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>audio_dbunch <span class="ot">=</span> auds <span class="sc">%&gt;%</span> <span class="fu">dataloaders</span>(commands_path, <span class="at">item_tfms =</span> tfms, <span class="at">bs =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>DBMelSpec <span class="ot">=</span> <span class="fu">SpectrogramTransformer</span>(<span class="at">mel=</span><span class="cn">TRUE</span>, <span class="at">to_db=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>a2s <span class="ot">=</span> <span class="fu">DBMelSpec</span>()</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>crop_4000ms <span class="ot">=</span> <span class="fu">ResizeSignal</span>(<span class="dv">4000</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>tfms <span class="ot">=</span> <span class="fu">list</span>(crop_4000ms, a2s)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>auds <span class="ot">=</span> <span class="fu">DataBlock</span>(<span class="at">blocks =</span> <span class="fu">list</span>(<span class="fu">AudioBlock</span>(), <span class="fu">CategoryBlock</span>()),  </span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>                 <span class="at">get_items =</span> get_audio_files, </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>                 <span class="at">splitter =</span> <span class="fu">RandomSplitter</span>(),</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>                 <span class="at">item_tfms =</span> tfms,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>                 <span class="at">get_y =</span> parent_label)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>audio_dbunch <span class="ot">=</span> auds <span class="sc">%&gt;%</span> <span class="fu">dataloaders</span>(commands_path, <span class="at">item_tfms =</span> tfms, <span class="at">bs =</span> <span class="dv">20</span>)</span></code></pre></div>
 <p>See batch:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>audio_dbunch <span class="sc">%&gt;%</span> <span class="fu">show_batch</span>(<span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="fl">8.5</span>), <span class="at">nrows =</span> <span class="dv">3</span>, <span class="at">ncols =</span> <span class="dv">3</span>, <span class="at">max_n =</span> <span class="dv">9</span>, <span class="at">dpi =</span> <span class="dv">180</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>audio_dbunch <span class="sc">%&gt;%</span> <span class="fu">show_batch</span>(<span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="fl">8.5</span>), <span class="at">nrows =</span> <span class="dv">3</span>, <span class="at">ncols =</span> <span class="dv">3</span>, <span class="at">max_n =</span> <span class="dv">9</span>, <span class="at">dpi =</span> <span class="dv">180</span>)</span></code></pre></div>
 </div>
 <div id="model" class="section level2">
 <h2>Model</h2>
 <p>Before fitting, 3 channels to 1 channel:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>torch <span class="ot">=</span> <span class="fu">torch</span>()</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>nn <span class="ot">=</span> <span class="fu">nn</span>()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(dls, <span class="fu">xresnet18</span>(<span class="at">pretrained =</span> <span class="cn">FALSE</span>), nn<span class="sc">$</span><span class="fu">CrossEntropyLoss</span>(), <span class="at">metrics=</span>accuracy)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># channel from 3 to 1</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>learn<span class="sc">$</span>model[<span class="dv">0</span>][<span class="dv">0</span>][[<span class="st">&#39;in_channels&#39;</span>]] <span class="sc">%f%</span> 1L</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># reshape</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>new_weight_shape <span class="ot">&lt;-</span> torch<span class="sc">$</span>nn<span class="sc">$</span>parameter<span class="sc">$</span><span class="fu">Parameter</span>(</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  (learn<span class="sc">$</span>model[<span class="dv">0</span>][<span class="dv">0</span>]<span class="sc">$</span>weight <span class="sc">%&gt;%</span> <span class="fu">narrow</span>(<span class="st">&#39;[:,1,:,:]&#39;</span>))<span class="sc">$</span><span class="fu">unsqueeze</span>(1L))</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># assign with %f%</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>learn<span class="sc">$</span>model[<span class="dv">0</span>][<span class="dv">0</span>][[<span class="st">&#39;weight&#39;</span>]] <span class="sc">%f%</span> new_weight_shape</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>torch <span class="ot">=</span> <span class="fu">torch</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>nn <span class="ot">=</span> <span class="fu">nn</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>learn <span class="ot">=</span> <span class="fu">Learner</span>(dls, <span class="fu">xresnet18</span>(<span class="at">pretrained =</span> <span class="cn">FALSE</span>), nn<span class="sc">$</span><span class="fu">CrossEntropyLoss</span>(), <span class="at">metrics=</span>accuracy)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># channel from 3 to 1</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>learn<span class="sc">$</span>model[<span class="dv">0</span>][<span class="dv">0</span>][[<span class="st">&#39;in_channels&#39;</span>]] <span class="sc">%f%</span> 1L</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># reshape</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>new_weight_shape <span class="ot">&lt;-</span> torch<span class="sc">$</span>nn<span class="sc">$</span>parameter<span class="sc">$</span><span class="fu">Parameter</span>(</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>  (learn<span class="sc">$</span>model[<span class="dv">0</span>][<span class="dv">0</span>]<span class="sc">$</span>weight <span class="sc">%&gt;%</span> <span class="fu">narrow</span>(<span class="st">&#39;[:,1,:,:]&#39;</span>))<span class="sc">$</span><span class="fu">unsqueeze</span>(1L))</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co"># assign with %f%</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>learn<span class="sc">$</span>model[<span class="dv">0</span>][<span class="dv">0</span>][[<span class="st">&#39;weight&#39;</span>]] <span class="sc">%f%</span> new_weight_shape</span></code></pre></div>
 </div>
 <div id="add-callbacks" class="section level2">
 <h2>Add callbacks</h2>
 <p>Weights and biases could be save and visualized on <a href="https://wandb.ai/">wandb.ai</a>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># login for the 1st time then remove it</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">login</span>(<span class="st">&quot;API_key_from_wandb_dot_ai&quot;</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">init</span>(<span class="at">project=</span><span class="st">&#39;R&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># login for the 1st time then remove it</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">login</span>(<span class="st">&quot;API_key_from_wandb_dot_ai&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">init</span>(<span class="at">project=</span><span class="st">&#39;R&#39;</span>)</span></code></pre></div>
 <pre><code>wandb: Currently logged in as: henry090 (use `wandb login --relogin` to force relogin)
 wandb: Tracking run with wandb version 0.10.8
 wandb: Syncing run macabre-zombie-2
@@ -404,7 +404,7 @@ wandb: Run `wandb off` to turn off syncing.</code></pre>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
 <p>Now we can train our model:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">3</span>, <span class="at">lr_max=</span><span class="fu">slice</span>(<span class="fl">1e-2</span>), <span class="at">cbs =</span> <span class="fu">list</span>(<span class="fu">WandbCallback</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>learn <span class="sc">%&gt;%</span> <span class="fu">fit_one_cycle</span>(<span class="dv">3</span>, <span class="at">lr_max=</span><span class="fu">slice</span>(<span class="fl">1e-2</span>), <span class="at">cbs =</span> <span class="fu">list</span>(<span class="fu">WandbCallback</span>()))</span></code></pre></div>
 <pre><code>epoch   train_loss   valid_loss   accuracy   time 
 ------  -----------  -----------  ---------  -----
 epoch   train_loss   valid_loss   accuracy   time 

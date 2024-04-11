@@ -356,9 +356,9 @@ on research into deep learning best practices undertaken at
 task. Because the proper image transformation can drastically improve
 the generalization while building a deep learning model.</p>
 <p>Read image:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>img <span class="ot">=</span> fastai<span class="sc">::</span><span class="fu">Image_create</span>(<span class="st">&#39;files/cat.jpeg&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>img <span class="ot">=</span> fastai<span class="sc">::</span><span class="fu">Image_create</span>(<span class="st">&#39;files/cat.jpeg&#39;</span>)</span></code></pre></div>
 <p>Plot it:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">show</span>() <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">show</span>() <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span></code></pre></div>
 <pre><code>&lt;center&gt;
 
 &lt;img src=&quot;images/cat.png&quot; alt=&quot;_&quot; style=&quot;width: 350px;&quot;/&gt;
@@ -367,17 +367,17 @@ the generalization while building a deep learning model.</p>
 </div>
 <div id="flipped" class="section level2">
 <h2>Flipped</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>img_res <span class="ot">=</span> <span class="fu">list</span>(img, img<span class="sc">$</span><span class="fu">flip_lr</span>())</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>titles <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;original&#39;</span>, <span class="st">&#39;flipped&#39;</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  img_res[[i]] <span class="sc">%&gt;%</span> <span class="fu">show_image</span>(<span class="at">ax =</span> axs[[i]],</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">title=</span>titles[i])</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>img_res <span class="ot">=</span> <span class="fu">list</span>(img, img<span class="sc">$</span><span class="fu">flip_lr</span>())</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>titles <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;original&#39;</span>, <span class="st">&#39;flipped&#39;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  img_res[[i]] <span class="sc">%&gt;%</span> <span class="fu">show_image</span>(<span class="at">ax =</span> axs[[i]],</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>               <span class="at">title=</span>titles[i])</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>}</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
 <pre><code>&lt;center&gt;
 
 &lt;img src=&quot;images/flip.png&quot; alt=&quot;_&quot; style=&quot;width: 350px;&quot;/&gt;
@@ -386,13 +386,13 @@ the generalization while building a deep learning model.</p>
 </div>
 <div id="dihedral" class="section level2">
 <h2>Dihedral</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">2</span>, <span class="dv">4</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>) {</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">DihedralItem</span>(<span class="at">p =</span> <span class="fl">1.</span>)(img, <span class="at">split_idx =</span> <span class="dv">0</span>), <span class="at">ctx =</span> axs[[i]])</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>) {</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">DihedralItem</span>(<span class="at">p =</span> <span class="fl">1.</span>)(img, <span class="at">split_idx =</span> <span class="dv">0</span>), <span class="at">ctx =</span> axs[[i]])</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>}</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
 <pre><code>&lt;center&gt;
 
 &lt;img src=&quot;images/dihedral.png&quot; alt=&quot;_&quot; style=&quot;width: 350px;&quot;/&gt;
@@ -401,16 +401,16 @@ the generalization while building a deep learning model.</p>
 </div>
 <div id="croppad" class="section level2">
 <h2>CropPad</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sz <span class="ot">=</span> <span class="fu">c</span>(300L, 500L, 700L)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>size <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">&#39;Size&#39;</span>, sz)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_image</span>(img<span class="sc">$</span><span class="fu">crop_pad</span>(sz[i]), <span class="at">ctx =</span> axs[[i]], <span class="at">title =</span> size[i])</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>sz <span class="ot">=</span> <span class="fu">c</span>(300L, 500L, 700L)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>size <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">&#39;Size&#39;</span>, sz)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="fu">show_image</span>(img<span class="sc">$</span><span class="fu">crop_pad</span>(sz[i]), <span class="at">ctx =</span> axs[[i]], <span class="at">title =</span> size[i])</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>}</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
 <pre><code>&lt;center&gt;
 
 &lt;img src=&quot;images/crop.png&quot; alt=&quot;_&quot; style=&quot;width: 350px;&quot;/&gt;
@@ -419,16 +419,16 @@ the generalization while building a deep learning model.</p>
 </div>
 <div id="padmodes" class="section level1">
 <h1>PadModes</h1>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pad_modes <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;border&#39;</span>, <span class="st">&#39;reflection&#39;</span>, <span class="st">&#39;zeros&#39;</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_image</span>(img<span class="sc">$</span><span class="fu">crop_pad</span>(<span class="fu">c</span>(600L,700L), <span class="at">pad_mode =</span> pad_modes[i]),</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">ctx =</span> axs[[i]], <span class="at">title =</span> pad_modes[i])</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>pad_modes <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;border&#39;</span>, <span class="st">&#39;reflection&#39;</span>, <span class="st">&#39;zeros&#39;</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="fu">show_image</span>(img<span class="sc">$</span><span class="fu">crop_pad</span>(<span class="fu">c</span>(600L,700L), <span class="at">pad_mode =</span> pad_modes[i]),</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>             <span class="at">ctx =</span> axs[[i]], <span class="at">title =</span> pad_modes[i])</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>}</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
 <pre><code>&lt;center&gt;
 
 &lt;img src=&quot;images/modes.png&quot; alt=&quot;_&quot; style=&quot;width: 350px;&quot;/&gt;
@@ -436,15 +436,15 @@ the generalization while building a deep learning model.</p>
 &lt;/center&gt;</code></pre>
 <div id="randomcrop" class="section level2">
 <h2>RandomCrop</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ff <span class="ot">=</span> <span class="fu">RandomCrop</span>(<span class="dv">100</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">ff</span>(img), <span class="at">ctx =</span> axs[[i]])</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>ff <span class="ot">=</span> <span class="fu">RandomCrop</span>(<span class="dv">100</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">ff</span>(img), <span class="at">ctx =</span> axs[[i]])</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>}</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
 <pre><code>&lt;center&gt;
 
 &lt;img src=&quot;images/random_crop.png&quot; alt=&quot;_&quot; style=&quot;width: 350px;&quot;/&gt;
@@ -453,15 +453,15 @@ the generalization while building a deep learning model.</p>
 </div>
 <div id="centercrop" class="section level2">
 <h2>CenterCrop</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ff <span class="ot">=</span> <span class="fu">RandomCrop</span>(100L)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">ff</span>(img, <span class="at">split_idx =</span> 1L), <span class="at">ctx =</span> axs[[i]])</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>ff <span class="ot">=</span> <span class="fu">RandomCrop</span>(100L)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">ff</span>(img, <span class="at">split_idx =</span> 1L), <span class="at">ctx =</span> axs[[i]])</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>}</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
 <pre><code>&lt;center&gt;
 
 &lt;img src=&quot;images/center_crop.png&quot; alt=&quot;_&quot; style=&quot;width: 350px;&quot;/&gt;
@@ -470,16 +470,16 @@ the generalization while building a deep learning model.</p>
 </div>
 <div id="resize-method" class="section level2">
 <h2>Resize method</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>resize <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;squish&#39;</span>, <span class="st">&#39;pad&#39;</span>, <span class="st">&#39;crop&#39;</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  rsz <span class="ot">=</span> <span class="fu">Resize</span>(<span class="dv">256</span>, <span class="at">method =</span> resize[i])</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">rsz</span>(img, <span class="at">split_idx =</span> 0L), <span class="at">ctx =</span> axs[[i]], <span class="at">title =</span> resize[i])</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>resize <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;squish&#39;</span>, <span class="st">&#39;pad&#39;</span>, <span class="st">&#39;crop&#39;</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>  rsz <span class="ot">=</span> <span class="fu">Resize</span>(<span class="dv">256</span>, <span class="at">method =</span> resize[i])</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">rsz</span>(img, <span class="at">split_idx =</span> 0L), <span class="at">ctx =</span> axs[[i]], <span class="at">title =</span> resize[i])</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>}</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
 <pre><code>&lt;center&gt;
 
 &lt;img src=&quot;images/resize.png&quot; alt=&quot;_&quot; style=&quot;width: 350px;&quot;/&gt;
@@ -488,15 +488,15 @@ the generalization while building a deep learning model.</p>
 </div>
 <div id="randomresizecrop" class="section level2">
 <h2>RandomResizeCrop</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">9</span>))</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ff <span class="ot">=</span> <span class="fu">RandomResizedCrop</span>(<span class="dv">100</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>) {</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">ff</span>(img), <span class="at">ctx =</span> axs[[i]])</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">c</span>(fig, axs) <span class="sc">%&lt;-%</span> <span class="fu">subplots</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="at">figsize =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">9</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>ff <span class="ot">=</span> <span class="fu">RandomResizedCrop</span>(<span class="dv">100</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>) {</span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>  <span class="fu">show_image</span>(<span class="fu">ff</span>(img), <span class="at">ctx =</span> axs[[i]])</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>}</span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>img <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">dpi =</span> <span class="dv">250</span>)</span></code></pre></div>
 <pre><code>&lt;center&gt;
 
 &lt;img src=&quot;images/random_resize.png&quot; alt=&quot;_&quot; style=&quot;width: 350px;&quot;/&gt;
